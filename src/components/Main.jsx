@@ -52,12 +52,13 @@ const Main = () => {
           value={text}
           onChange={handleTextChange}
           autoFocus
+          required
         />
       </div>
       <h2>Due Date</h2>
       <div className="form-control">
         <input
-          type="text"
+          type="date"
           placeholder="Enter Time"
           value={time}
           onChange={handleTimeChange}
@@ -83,7 +84,7 @@ const Main = () => {
         return (
           <div key={id} className="task">
             <div className="task-info">
-              {" "}
+              <div className="index">{id + 1}</div>{" "}
               <div className="text">{task.text}</div>
               <div className="time">{task.day}</div>
             </div>
