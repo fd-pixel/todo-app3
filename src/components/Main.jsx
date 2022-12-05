@@ -77,9 +77,11 @@ const Main = () => {
             setTime("");
             setText("");
           } else if (text.length !== 0) {
-            alert("Lütfen tarih giriniz");
+            alert("Please enter a due date ");
           } else if (time.length !== 0) {
-            alert("Lütfen iş giriniz");
+            alert("Please enter a task ");
+          } else if (text.length === 0 && time.length === 0) {
+            alert("Both a task and a due date should be entered ");
           }
         }}
       >
