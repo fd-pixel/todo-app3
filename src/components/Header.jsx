@@ -20,7 +20,7 @@ const Header = () => {
   //console.log(clock);
   useEffect(() => {
     if (
-      clock.slice(0, 2) < 2
+      clock.slice(0, 2) < 4
       // clock.slice(0, 2) >= 1 &&
       //clock.includes("PM")
     ) {

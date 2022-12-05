@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Main = () => {
   const [tasks, setTasks] = useState([
@@ -25,6 +27,21 @@ const Main = () => {
   ]);
   const [text, setText] = useState("");
   const [time, setTime] = useState("");
+  const showError1Message = () => {
+    toast.error("Both a task and a due date should be entered", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+  const showError2Message = () => {
+    toast.error("Please enter a due date ", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+  const showError3Message = () => {
+    toast.error("Please enter a task ", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
   const handleTextChange = (event) => {
     setText(event.target.value);
@@ -42,7 +59,6 @@ const Main = () => {
       <div className="box-header">
         <h1>Todos</h1>
       </div>
-
       <div className="form-control">
         {" "}
         <h2>Task</h2>
@@ -62,7 +78,6 @@ const Main = () => {
           onChange={handleTimeChange}
         />
       </div>
-
       <br></br>
       <button
         className="btn"
@@ -75,17 +90,17 @@ const Main = () => {
             setTime("");
             setText("");
           } else if (text.length !== 0) {
-            alert("Please enter a due date ");
+            showError2Message();
           } else if (time.length !== 0) {
-            alert("Please enter a task ");
+            showError3Message();
           } else if (text.length === 0 && time.length === 0) {
-            alert("Both a task and a due date should be entered ");
+            showError1Message();
           }
         }}
       >
         Add Task
       </button>
-
+      <ToastContainer autoClose={2000} />;
       {tasks.map((task, id) => {
         return (
           <div key={id} className="task">
