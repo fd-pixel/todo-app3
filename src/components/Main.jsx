@@ -27,18 +27,24 @@ const Main = () => {
   ]);
   const [text, setText] = useState("");
   const [time, setTime] = useState("");
+
+  const showSuccessMessage = () => {
+    toast.success("Congrats!!!New task entered");
+  };
+
   const showError1Message = () => {
-    toast.error("Both a task and a due date should be entered", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.error("Both a task and a due date should be entered", {});
   };
   const showError2Message = () => {
-    toast.error("Please enter a due date ", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    toast.error("Please enter a due date ", {});
   };
   const showError3Message = () => {
     toast.error("Please enter a task ", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+  const showError4Message = () => {
+    toast.error("You can't create same task in the same day ", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
@@ -82,13 +88,20 @@ const Main = () => {
       <button
         className="btn"
         onClick={() => {
-          if (text.length !== 0 && time.length !== 0) {
+          if (text !== "" && time !== "") {
             setTasks([
               ...tasks,
               { id: Date.now(), text, day: time, isDone: false },
             ]);
             setTime("");
             setText("");
+            showSuccessMessage();
+          } else if (
+            text.length !== 0 &&
+            time.length !== 0
+            //tasks.text.includes(text)
+          ) {
+            showError4Message();
           } else if (text.length !== 0) {
             showError2Message();
           } else if (time.length !== 0) {
@@ -100,7 +113,7 @@ const Main = () => {
       >
         Add Task
       </button>
-      <ToastContainer autoClose={2000} />;
+      <ToastContainer autoClose={1000} />
       {tasks.map((task, id) => {
         return (
           <div key={id} className="task">
@@ -109,12 +122,15 @@ const Main = () => {
               <div className="text">{task.text}</div>
               <div className="time">{task.day}</div>
             </div>
-            <div className="deleteicon">
+            <div className="icons">
+              <button className="btn" onClick={() => {}}>
+                Edit
+              </button>
               <FaTimes
                 onClick={() => {
                   deleteTask(task.id);
                 }}
-                style={{ color: "red", cursor: "pointer" }}
+                style={{ color: "red", cursor: "pointer", marginLeft: "20px" }}
               />
             </div>
           </div>
