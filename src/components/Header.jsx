@@ -16,16 +16,28 @@ const Header = () => {
     day: "numeric",
     month: "long",
   };
-  const date = new Date().toLocaleDateString("en-US", options);
-
+  const date = new Date().toLocaleDateString("en", options);
+  //console.log(clock);
   useEffect(() => {
-    if (clock.slice(0, 2) > 6 && clock.slice(0, 2) <= 11) {
+    if (
+      clock.slice(0, 2) < 2
+      // clock.slice(0, 2) >= 1 &&
+      //clock.includes("PM")
+    ) {
       setGreetings("Good Morning");
-    } else if (clock.slice(0, 2) > 11 && clock.slice(0, 2) <= 15) {
+    } else if (
+      clock.slice(0, 2) >= 1 &&
+      clock.slice(0, 2) <= 6
+      //clock.includes("PM")
+    ) {
       setGreetings("Good Afternoon");
     } else if (clock.slice(0, 2) > 15 && clock.slice(0, 2) <= 21) {
       setGreetings("Good Evening");
-    } else if (clock.slice(0, 2) > 22 || clock.slice(0, 2) <= 6) {
+    } else if (
+      // clock.slice(0, 2) > 22 ||
+      clock.slice(0, 2) <= 6 &&
+      clock.includes("PM")
+    ) {
       setGreetings("Good Night");
     }
   }, [clock]);

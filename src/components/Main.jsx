@@ -51,8 +51,6 @@ const Main = () => {
           placeholder="Enter Task"
           value={text}
           onChange={handleTextChange}
-          autoFocus
-          required
         />
       </div>
       <h2>Due Date</h2>
