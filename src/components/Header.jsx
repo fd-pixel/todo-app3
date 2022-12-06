@@ -20,27 +20,28 @@ const Header = () => {
   //console.log(clock);
   useEffect(() => {
     if (
-      clock.slice(0, 2) < 4
-      // clock.slice(0, 2) >= 1 &&
-      //clock.includes("PM")
+      clock.slice(0, 1) < 10 &&
+      clock.slice(0, 1) >= 6 &&
+      clock.includes("AM")
     ) {
       setGreetings("Good Morning");
-    } else if (
-      clock.slice(0, 2) >= 1 &&
-      clock.slice(0, 2) <= 6
-      //clock.includes("PM")
-    ) {
+    } else if (clock.slice(0, 2) <= 10 && clock.includes("AM")) {
+      setGreetings("Good Morning");
+    } else if (clock.slice(0, 1) <= 4 && clock.includes("PM")) {
       setGreetings("Good Afternoon");
-    } else if (clock.slice(0, 2) > 15 && clock.slice(0, 2) <= 21) {
-      setGreetings("Good Evening");
     } else if (
-      // clock.slice(0, 2) > 22 ||
-      clock.slice(0, 2) <= 6 &&
+      clock.slice(0, 1) > 4 &&
+      clock.slice(0, 1) < 10 &&
       clock.includes("PM")
     ) {
+      setGreetings("Good Evening");
+    } else if (clock.slice(0, 1) < 6 && clock.includes("AM")) {
+      setGreetings("Good Night");
+    } else if (clock.slice(0, 2) <= 12 && clock.includes("PM")) {
       setGreetings("Good Night");
     }
   }, [clock]);
+  console.log(clock);
 
   return (
     <section className="header__container">

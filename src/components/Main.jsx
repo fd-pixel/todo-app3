@@ -89,17 +89,18 @@ const Main = () => {
         className="btn"
         onClick={() => {
           if (text !== "" && time !== "") {
+            const newtext = text.trim();
             setTasks([
               ...tasks,
-              { id: Date.now(), text, day: time, isDone: false },
+              { id: Date.now(), text: newtext, day: time, isDone: false },
             ]);
             setTime("");
             setText("");
             showSuccessMessage();
           } else if (
             text.length !== 0 &&
-            time.length !== 0
-            //tasks.text.includes(text)
+            time.length !== 0 &&
+            tasks.text === text
           ) {
             showError4Message();
           } else if (text.length !== 0) {
