@@ -67,7 +67,7 @@ const Main = () => {
     );
   };
 
-  console.log(text, time);
+  //console.log(text, time);
   return (
     <div className="container">
       <div className="box-header">
