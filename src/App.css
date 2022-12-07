@@ -6,6 +6,11 @@
   text-align: left;
   opacity: 10;
 }
+.buttons {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 .Header {
   background-color: #282c34;
@@ -67,6 +72,10 @@ body {
 .icons {
   margin-right: 20px;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn:focus {
@@ -105,7 +114,7 @@ body {
     #45a247,
     #283c86
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  transition: ease-in;
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;

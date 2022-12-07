@@ -13,21 +13,11 @@ const Main = () => {
     //   day: "Feb 5th at 2:30pm",
     //   isDone: true,
     // },
-    // {
-    //   id: 2,
-    //   text: "Feed the Dog",
-    //   day: "Feb 6th at 1:30pm",
-    //   isDone: false,
-    // },
-    // {
-    //   id: 3,
-    //   text: "Attend in-Class",
-    //   day: "Feb 7th at 20:00pm",
-    //   isDone: false,
-    // },
   ]);
   const [text, setText] = useState("");
   const [time, setTime] = useState("");
+  const [taskEditing, setTaskEditing] = useState("");
+  const [editingText, setEditingText] = useState("");
 
   const showSuccessMessage = () => {
     toast.success("Congrats!!!New task entered");
@@ -124,13 +114,27 @@ const Main = () => {
           <div key={id} className={task.isDone ? "task-completed" : "task"}>
             <div className={task.isDone ? "task-info-completed" : "task-info"}>
               <div className="index">{id + 1}</div>{" "}
-              <div className="text">{task.text}</div>
+              {taskEditing === task.id ? (
+                <input
+                  type="text"
+                  placeholder=""
+                  value={editingText}
+                  onChange={(e) => setEditingText(e.target.value)}
+                />
+              ) : (
+                <div className="text">{task.text}</div>
+              )}
               <div className="time">{task.day}</div>
             </div>
             <div className="icons">
-              <button className="btn" onClick={() => {}}>
-                Edit
-              </button>
+              <div className="buttons">
+                <button className="btn" onClick={() => setTaskEditing(task.id)}>
+                  Edit Text
+                </button>
+                <button className="btn" onClick={() => setTaskEditing(task.id)}>
+                  Edit Time
+                </button>
+              </div>
               <FaTimes
                 onClick={() => {
                   deleteTask(task.id);
@@ -142,7 +146,7 @@ const Main = () => {
                   completedTask(task.id);
                 }}
                 style={{
-                  color: "blue",
+                  color: "red",
                   cursor: "pointer",
                   marginLeft: "20px",
                   width: "30px",
