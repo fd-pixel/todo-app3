@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { AiFillCheckSquare } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -8,9 +9,9 @@ const Main = () => {
   const [tasks, setTasks] = useState([
     // {
     //   id: 1,
-    //   text: "Study React Pre-Class Notes",
+    //   text: "asd",
     //   day: "Feb 5th at 2:30pm",
-    //   isDone: false,
+    //   isDone: true,
     // },
     // {
     //   id: 2,
@@ -58,6 +59,13 @@ const Main = () => {
   const deleteTask = (deletedTaskId) => {
     setTasks(tasks.filter((task) => task.id !== deletedTaskId));
   };
+  const completedTask = (completedTaskId) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === completedTaskId ? { ...task, isDone: !task.isDone } : task
+      )
+    );
+  };
 
   console.log(text, time);
   return (
@@ -97,11 +105,7 @@ const Main = () => {
             setTime("");
             setText("");
             showSuccessMessage();
-          } else if (
-            text.length !== 0 &&
-            time.length !== 0 &&
-            tasks.text === text
-          ) {
+          } else if (text.length !== 0 && time.length !== 0) {
             showError4Message();
           } else if (text.length !== 0) {
             showError2Message();
@@ -117,8 +121,8 @@ const Main = () => {
       <ToastContainer autoClose={1000} />
       {tasks.map((task, id) => {
         return (
-          <div key={id} className="task">
-            <div className="task-info">
+          <div key={id} className={task.isDone ? "task-completed" : "task"}>
+            <div className={task.isDone ? "task-info-completed" : "task-info"}>
               <div className="index">{id + 1}</div>{" "}
               <div className="text">{task.text}</div>
               <div className="time">{task.day}</div>
@@ -132,6 +136,17 @@ const Main = () => {
                   deleteTask(task.id);
                 }}
                 style={{ color: "red", cursor: "pointer", marginLeft: "20px" }}
+              />
+              <AiFillCheckSquare
+                onClick={() => {
+                  completedTask(task.id);
+                }}
+                style={{
+                  color: "blue",
+                  cursor: "pointer",
+                  marginLeft: "20px",
+                  width: "30px",
+                }}
               />
             </div>
           </div>

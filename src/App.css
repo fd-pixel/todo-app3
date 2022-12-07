@@ -1,6 +1,11 @@
 .App {
   text-align: center;
 }
+.task-info-completed {
+  text-decoration: line-through;
+  text-align: left;
+  opacity: 10;
+}
 
 .Header {
   background-color: #282c34;
@@ -79,6 +84,28 @@ body {
 
 .task {
   background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task-completed {
+  background: #283c86; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #45a247,
+    #283c86
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #45a247,
+    #283c86
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
