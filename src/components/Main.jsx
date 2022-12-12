@@ -67,28 +67,33 @@ const Main = () => {
   function submitEditingTask(submittedTaskId) {
     setTasks(
       tasks.map((task) => {
-        if (task.id === submittedTaskId) {
+        if (task.id === submittedTaskId && editingText.length !== 0) {
           task.text = editingText;
+          showSuccessMessage2();
+        } else if (task.id === submittedTaskId && editingText.length === 0) {
+          showError3Message();
         }
+
         return task;
       })
     );
     setTaskEditing("");
     setEditingText("");
-    showSuccessMessage2();
   }
   function submitEditingTime(submittedTaskId) {
     setTasks(
       tasks.map((task) => {
-        if (task.id === submittedTaskId) {
+        if (task.id === submittedTaskId && editingTime !== "") {
           task.day = editingTime;
+          showSuccessMessage3();
+        } else if (tasks.id === submittedTaskId && editingTime.length === 0) {
+          showError4Message();
         }
         return task;
       })
     );
     setTimeEditing("");
     setEditingTime("");
-    showSuccessMessage3();
   }
 
   //console.log(text, time);
