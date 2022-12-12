@@ -20,7 +20,7 @@ const Header = () => {
   //console.log(clock);
   useEffect(() => {
     if (
-      clock.slice(0, 2) <= 12 &&
+      clock.slice(0, 1) <= 12 &&
       clock.slice(0, 1) >= 6 &&
       clock.includes("AM")
     ) {

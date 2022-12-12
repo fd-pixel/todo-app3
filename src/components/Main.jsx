@@ -18,9 +18,17 @@ const Main = () => {
   const [time, setTime] = useState("");
   const [taskEditing, setTaskEditing] = useState("");
   const [editingText, setEditingText] = useState("");
+  const [timeEditing, setTimeEditing] = useState("");
+  const [editingTime, setEditingTime] = useState("");
 
   const showSuccessMessage = () => {
     toast.success("Congrats!!!New task entered");
+  };
+  const showSuccessMessage2 = () => {
+    toast.success("Task changed successfully");
+  };
+  const showSuccessMessage3 = () => {
+    toast.success("Due date changed successfully");
   };
 
   const showError1Message = () => {
@@ -56,6 +64,32 @@ const Main = () => {
       )
     );
   };
+  function submitEditingTask(submittedTaskId) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === submittedTaskId) {
+          task.text = editingText;
+        }
+        return task;
+      })
+    );
+    setTaskEditing("");
+    setEditingText("");
+    showSuccessMessage2();
+  }
+  function submitEditingTime(submittedTaskId) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === submittedTaskId) {
+          task.day = editingTime;
+        }
+        return task;
+      })
+    );
+    setTimeEditing("");
+    setEditingTime("");
+    showSuccessMessage3();
+  }
 
   //console.log(text, time);
   return (
@@ -124,16 +158,49 @@ const Main = () => {
               ) : (
                 <div className="text">{task.text}</div>
               )}
-              <div className="time">{task.day}</div>
+              {timeEditing === task.id ? (
+                <input
+                  type="date"
+                  placeholder=""
+                  value={editingTime}
+                  onChange={(e) => setEditingTime(e.target.value)}
+                />
+              ) : (
+                <div className="text">{task.day}</div>
+              )}
             </div>
             <div className="icons">
               <div className="buttons">
-                <button className="btn" onClick={() => setTaskEditing(task.id)}>
-                  Edit Text
-                </button>
-                <button className="btn" onClick={() => setTaskEditing(task.id)}>
-                  Edit Time
-                </button>
+                {taskEditing !== task.id ? (
+                  <button
+                    className="btn"
+                    onClick={() => setTaskEditing(task.id)}
+                  >
+                    Edit Task
+                  </button>
+                ) : (
+                  <button
+                    className="btn"
+                    onClick={() => submitEditingTask(task.id)}
+                  >
+                    Submit Task
+                  </button>
+                )}
+                {timeEditing !== task.id ? (
+                  <button
+                    className="btn"
+                    onClick={() => setTimeEditing(task.id)}
+                  >
+                    Edit Time
+                  </button>
+                ) : (
+                  <button
+                    className="btn"
+                    onClick={() => submitEditingTime(task.id)}
+                  >
+                    Submit Time
+                  </button>
+                )}
               </div>
               <FaTimes
                 onClick={() => {
